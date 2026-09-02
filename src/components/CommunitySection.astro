@@ -1,0 +1,383 @@
+﻿---
+---
+
+<section id="community" class="community-section">
+  <div class="community-container">
+    <div class="community-header">
+      <div class="badge-wrap">
+        <span id="community-badge" class="community-badge">Community Stories</span>
+      </div>
+      <h2 class="community-title">
+        A quiet sanctuary for <span id="community-hl" class="highlight-word">thousands</span> of thoughtful minds.
+      </h2>
+      <p class="community-subtitle">
+        Read how gentle daily documenting helps people navigate burnout, bedtime overthinking, and modern sensory overload.
+      </p>
+    </div>
+
+    <div class="stats-banner" id="stats-banner-card">
+      <div class="stat-item">
+        <div class="stat-number-wrap">
+          <span class="stat-number" id="stat-circle-1">94%</span>
+        </div>
+        <p class="stat-desc">Felt more grounded within their first 7 days of daily micro-check-ins.</p>
+      </div>
+
+      <div class="stat-divider"></div>
+
+      <div class="stat-item">
+        <div class="stat-number-wrap">
+          <span class="stat-number" id="stat-circle-2">2.4M+</span>
+        </div>
+        <p class="stat-desc">Reflections documented privately on personal devices with zero cloud tracking.</p>
+      </div>
+
+      <div class="stat-divider"></div>
+
+      <div class="stat-item">
+        <div class="stat-number-wrap">
+          <span class="stat-number" id="stat-circle-3">0</span>
+        </div>
+        <p class="stat-desc">Advertisements, third-party analytics, or commercial streak penalties.</p>
+      </div>
+    </div>
+
+    <div class="stories-grid">
+      <article class="story-card" id="story-card-1">
+        <div class="story-top">
+          <div class="author-meta">
+            <span class="author-avatar">MK</span>
+            <div class="author-info">
+              <span class="author-name">Maya K.</span>
+              <span class="author-role">Product Designer • London</span>
+            </div>
+          </div>
+          <span class="story-tag" id="story-tag-1">#BurnoutRelief</span>
+        </div>
+
+        <p class="story-quote">
+          "I used to feel anxious if I broke a 30-day streak in other apps. <em>I Am Well</em> feels like sitting down with a warm cup of herbal tea. It doesn't scream at me to be productive; it just holds space when I need it."
+        </p>
+
+        <div class="story-footer">
+          <span class="favorite-ritual">Favorite ritual: Morning Intention</span>
+        </div>
+      </article>
+
+      <article class="story-card" id="story-card-2">
+        <div class="story-top">
+          <div class="author-meta">
+            <span class="author-avatar">DT</span>
+            <div class="author-info">
+              <span class="author-name">David T.</span>
+              <span class="author-role">High School Educator • Chicago</span>
+            </div>
+          </div>
+          <span class="story-tag" id="story-tag-2">#SleepSanctuary</span>
+        </div>
+
+        <p class="story-quote">
+          "The evening release prompt completely stopped my bedtime thought spirals. Writing down the things I cannot fix until tomorrow allows my nervous system to finally power down for genuine, restful sleep."
+        </p>
+
+        <div class="story-footer">
+          <span class="favorite-ritual">Favorite ritual: Evening Release & Gratitude</span>
+        </div>
+      </article>
+
+      <article class="story-card" id="story-card-3">
+        <div class="story-top">
+          <div class="author-meta">
+            <span class="author-avatar">SL</span>
+            <div class="author-info">
+              <span class="author-name">Sarah L.</span>
+              <span class="author-role">Mental Health Advocate • Toronto</span>
+            </div>
+          </div>
+          <span class="story-tag" id="story-tag-3">#SomaticPause</span>
+        </div>
+
+        <p class="story-quote">
+          "The 30-second somatic check-in is so simple, but it fundamentally changed how I notice physical stress during busy workdays. Even my therapist noticed how much clearer my insights became."
+        </p>
+
+        <div class="story-footer">
+          <span class="favorite-ritual">Favorite ritual: Midday Somatic Check-In</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  import {
+    drawablyCard,
+    drawablyBadge,
+    drawablyCircle,
+    drawablyHighlight,
+  } from "drawably";
+
+  function initCommunitySection() {
+    const communityBadge = document.querySelector<HTMLElement>("#community-badge");
+    if (communityBadge) {
+      drawablyBadge(communityBadge, { variant: "scribble", roughness: 0.8 });
+    }
+
+    const communityHl = document.querySelector<HTMLElement>("#community-hl");
+    if (communityHl) {
+      drawablyHighlight(communityHl, { roughness: 1.1 });
+    }
+
+    const statsCard = document.querySelector<HTMLElement>("#stats-banner-card");
+    if (statsCard) {
+      drawablyCard(statsCard, { roughness: 1.0 });
+    }
+
+    const circleIds = ["#stat-circle-1", "#stat-circle-2", "#stat-circle-3"];
+    circleIds.forEach((id) => {
+      const el = document.querySelector<HTMLElement>(id);
+      if (el) {
+        drawablyCircle(el, { roughness: 1.15, boil: 0.25 });
+      }
+    });
+
+    const storyCards = ["#story-card-1", "#story-card-2", "#story-card-3"];
+    storyCards.forEach((id) => {
+      const card = document.querySelector<HTMLElement>(id);
+      if (card) {
+        drawablyCard(card, { roughness: 1.05 });
+      }
+    });
+
+    const tagIds = ["#story-tag-1", "#story-tag-2", "#story-tag-3"];
+    tagIds.forEach((id) => {
+      const tag = document.querySelector<HTMLElement>(id);
+      if (tag) {
+        drawablyBadge(tag, { variant: "outline", roughness: 0.85 });
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCommunitySection);
+  } else {
+    initCommunitySection();
+  }
+  document.addEventListener("astro:page-load", initCommunitySection);
+</script>
+
+<style>
+  .community-section {
+    padding: 96px 24px;
+    background-color: var(--bg-cream);
+    border-top: 1px solid var(--border-soft);
+  }
+
+  .community-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .community-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .community-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-sage);
+    padding: 2px 10px;
+    display: inline-block;
+  }
+
+  .community-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 3.8vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .highlight-word {
+    font-style: italic;
+    color: var(--accent-sage-dark);
+    padding: 0 4px;
+  }
+
+  .community-subtitle {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .stats-banner {
+    background: #ffffff;
+    padding: 36px 32px;
+    border-radius: 4px;
+    box-shadow: 0 8px 28px rgba(37, 56, 48, 0.05);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .stat-item {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+  }
+
+  .stat-number-wrap {
+    display: inline-block;
+    padding: 4px 8px;
+  }
+
+  .stat-number {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: inline-block;
+    padding: 2px 8px;
+  }
+
+  .stat-desc {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    max-width: 240px;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 64px;
+    background: dashed rgba(37, 56, 48, 0.15);
+    border-right: 1px dashed rgba(37, 56, 48, 0.15);
+  }
+
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .story-card {
+    background: #ffffff;
+    padding: 32px 28px;
+    border-radius: 4px;
+    box-shadow: 0 8px 28px rgba(37, 56, 48, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .story-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed rgba(37, 56, 48, 0.12);
+  }
+
+  .author-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .author-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--bg-sage-subtle);
+    border: 1px solid var(--accent-sage);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--accent-sage-dark);
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .author-name {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .author-role {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .story-tag {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--accent-sage);
+    padding: 2px 8px;
+  }
+
+  .story-quote {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--text-primary);
+    font-style: italic;
+    margin-bottom: auto;
+  }
+
+  .story-footer {
+    padding-top: 10px;
+    border-top: 1px dashed rgba(37, 56, 48, 0.08);
+  }
+
+  .favorite-ritual {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--accent-sage);
+  }
+
+  @media (max-width: 900px) {
+    .stats-banner {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .stat-divider {
+      display: none;
+    }
+
+    .stories-grid {
+      grid-template-columns: 1fr;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .community-section {
+      padding: 64px 20px;
+    }
+  }
+</style>
