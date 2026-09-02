@@ -1,0 +1,368 @@
+﻿---
+---
+
+<section id="rituals" class="rituals-section">
+  <div class="rituals-container">
+    <div class="section-header">
+      <div class="badge-wrap">
+        <span id="rituals-badge" class="section-badge">How It Works</span>
+      </div>
+      <h2 class="section-title">
+        Three gentle pauses to <span id="rituals-hl" class="highlight-word">reconnect</span> throughout your day.
+      </h2>
+      <p class="section-subtitle">
+        Documenting in <em>I Am Well</em> is not about writing long essays. It takes just 2 to 3 minutes to check in with your mind, body, and emotional weather.
+      </p>
+    </div>
+
+    <div class="rituals-grid">
+      <article class="ritual-card" id="ritual-card-1">
+        <div class="card-top">
+          <span class="ritual-number" id="badge-ritual-1">01 • Morning</span>
+          <span class="ritual-time">6:00 – 9:00 AM</span>
+        </div>
+
+        <h3 class="ritual-heading">Morning Intention</h3>
+        <p class="ritual-prompt">
+          <em>Prompt: "How do you want to hold your energy today?"</em>
+        </p>
+
+        <div class="sample-entry-box">
+          <p class="sample-text">
+            "Stepping into the morning without rushing. Choosing patience with myself and remembering that my worth isn't measured by productivity."
+          </p>
+          <span class="entry-signature">— Elena • Morning Entry</span>
+        </div>
+
+        <div class="ritual-features">
+          <ul class="features-list" id="ritual-list-1">
+            <li>3 guided breaths before typing</li>
+            <li>1 core emotional intention</li>
+            <li>Sets calm mental boundaries</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="ritual-card" id="ritual-card-2">
+        <div class="card-top">
+          <span class="ritual-number" id="badge-ritual-2">02 • Midday</span>
+          <span class="ritual-time">12:00 – 2:00 PM</span>
+        </div>
+
+        <h3 class="ritual-heading">Somatic Check-In</h3>
+        <p class="ritual-prompt">
+          <em>Prompt: "Where in your body are you holding tension?"</em>
+        </p>
+
+        <div class="sample-entry-box">
+          <p class="sample-text">
+            "Notice shoulders hunched near ears. Dropping them now. Unclenching jaw. Taking one full, expansive breath into the belly."
+          </p>
+          <span class="entry-signature">— Marcus • Midday Entry</span>
+        </div>
+
+        <div class="ritual-features">
+          <ul class="features-list" id="ritual-list-2">
+            <li>30-second body scan reminder</li>
+            <li>One-tap emotional weather tracking</li>
+            <li>Interrupts midday stress spirals</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="ritual-card" id="ritual-card-3">
+        <div class="card-top">
+          <span class="ritual-number" id="badge-ritual-3">03 • Evening</span>
+          <span class="ritual-time">8:00 – 10:00 PM</span>
+        </div>
+
+        <h3 class="ritual-heading">Release & Gratitude</h3>
+        <p class="ritual-prompt">
+          <em>Prompt: "What is one thought you are ready to let go of?"</em>
+        </p>
+
+        <div class="sample-entry-box">
+          <p class="sample-text">
+            "The unfinished draft can wait until tomorrow. Releasing the need to control every outcome. Grateful for quiet tea and a soft bed."
+          </p>
+          <span class="entry-signature">— Sophia • Evening Entry</span>
+        </div>
+
+        <div class="ritual-features">
+          <ul class="features-list" id="ritual-list-3">
+            <li>3 micro-gratitudes + 1 release prompt</li>
+            <li>Clears cognitive clutter before sleep</li>
+            <li>Encrypted and sealed in your vault</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <div class="rituals-quote-box">
+      <hr class="quote-divider" id="quote-divider-top" />
+      <blockquote class="manifesto-quote">
+        "Healing is not a sprint to fix everything that is broken. It is the gentle practice of noticing where you are, and choosing to be kind to yourself there."
+      </blockquote>
+      <span class="quote-author">— The Philosophy of I Am Well</span>
+      <hr class="quote-divider" id="quote-divider-bottom" />
+    </div>
+  </div>
+</section>
+
+<script>
+  import {
+    drawablyCard,
+    drawablyList,
+    drawablyBadge,
+    drawablyHighlight,
+    drawablyDivider
+  } from "drawably";
+
+  function initDailyRituals() {
+    const ritualsBadge = document.querySelector<HTMLElement>("#rituals-badge");
+    if (ritualsBadge) {
+      drawablyBadge(ritualsBadge, { variant: "scribble", roughness: 0.8 });
+    }
+
+    const ritualsHl = document.querySelector<HTMLElement>("#rituals-hl");
+    if (ritualsHl) {
+      drawablyHighlight(ritualsHl, { roughness: 1.1 });
+    }
+
+    const cardIds = ["#ritual-card-1", "#ritual-card-2", "#ritual-card-3"];
+    cardIds.forEach((id) => {
+      const card = document.querySelector<HTMLElement>(id);
+      if (card) {
+        drawablyCard(card, { roughness: 1.05 });
+      }
+    });
+
+    const badgeIds = ["#badge-ritual-1", "#badge-ritual-2", "#badge-ritual-3"];
+    badgeIds.forEach((id) => {
+      const badge = document.querySelector<HTMLElement>(id);
+      if (badge) {
+        drawablyBadge(badge, { variant: "outline", roughness: 0.9 });
+      }
+    });
+
+    const listIds = ["#ritual-list-1", "#ritual-list-2", "#ritual-list-3"];
+    listIds.forEach((id) => {
+      const list = document.querySelector<HTMLElement>(id);
+      if (list) {
+        drawablyList(list, { marker: "check", roughness: 1.1 });
+      }
+    });
+
+    const divTop = document.querySelector<HTMLElement>("#quote-divider-top");
+    if (divTop) {
+      drawablyDivider(divTop, { roughness: 1.2 });
+    }
+
+    const divBottom = document.querySelector<HTMLElement>("#quote-divider-bottom");
+    if (divBottom) {
+      drawablyDivider(divBottom, { roughness: 1.2 });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initDailyRituals);
+  } else {
+    initDailyRituals();
+  }
+  document.addEventListener("astro:page-load", initDailyRituals);
+</script>
+
+<style>
+  .rituals-section {
+    padding: 96px 24px;
+    background-color: var(--bg-cream);
+    border-top: 1px solid var(--border-soft);
+  }
+
+  .rituals-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-sage);
+    padding: 2px 10px;
+    display: inline-block;
+  }
+
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 3.8vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .highlight-word {
+    font-style: italic;
+    color: var(--accent-sage-dark);
+    padding: 0 4px;
+  }
+
+  .section-subtitle {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .rituals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .ritual-card {
+    background: #ffffff;
+    padding: 32px 28px;
+    border-radius: 4px;
+    box-shadow: 0 8px 28px rgba(37, 56, 48, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    height: 100%;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed rgba(37, 56, 48, 0.12);
+  }
+
+  .ritual-number {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-sage);
+    padding: 2px 8px;
+  }
+
+  .ritual-time {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .ritual-heading {
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+  }
+
+  .ritual-prompt {
+    font-size: 0.9375rem;
+    color: var(--accent-sage);
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  .sample-entry-box {
+    background: var(--bg-sage-subtle);
+    padding: 16px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sample-text {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    font-style: italic;
+  }
+
+  .entry-signature {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    align-self: flex-end;
+  }
+
+  .ritual-features {
+    margin-top: auto;
+    padding-top: 12px;
+  }
+
+  .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+
+  .rituals-quote-box {
+    max-width: 760px;
+    margin: 24px auto 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .quote-divider {
+    width: 100%;
+    border: none;
+    height: 10px;
+  }
+
+  .manifesto-quote {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+    font-style: italic;
+    padding: 0 16px;
+  }
+
+  .quote-author {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-sage);
+  }
+
+  @media (max-width: 960px) {
+    .rituals-grid {
+      grid-template-columns: 1fr;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .rituals-section {
+      padding: 64px 20px;
+    }
+  }
+</style>
