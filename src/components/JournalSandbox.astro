@@ -1,0 +1,478 @@
+---
+---
+
+<div class="sandbox-wrapper">
+  <div class="sandbox-annotation">
+    <span class="sandbox-pill" id="sandbox-pill">Interactive Live Demo</span>
+    <span class="sandbox-hint">Try documenting right now — no sign up required</span>
+  </div>
+
+  <div id="journal-sandbox-card" class="sandbox-card">
+    <div class="sandbox-header">
+      <div class="header-left">
+        <span class="entry-date" id="live-entry-date">Today • Mindful Check-in</span>
+        <span class="privacy-tag" id="sandbox-privacy-tag">Private & On-Device</span>
+      </div>
+      <div class="header-right">
+        <span class="entry-time" id="live-entry-time">Morning Session</span>
+      </div>
+    </div>
+
+    <div class="mood-selection-area">
+      <span class="section-label">Emotional Weather:</span>
+      <div class="mood-chips" role="radiogroup" aria-label="Select your mood">
+        <label class="mood-chip" id="mood-chip-1">
+          <span class="radio-wrapper"><input type="radio" name="sandbox-mood" value="Peaceful" checked /></span>
+          <span class="chip-text">🌿 Peaceful</span>
+        </label>
+        <label class="mood-chip" id="mood-chip-2">
+          <span class="radio-wrapper"><input type="radio" name="sandbox-mood" value="Grounded" /></span>
+          <span class="chip-text">⚓ Grounded</span>
+        </label>
+        <label class="mood-chip" id="mood-chip-3">
+          <span class="radio-wrapper"><input type="radio" name="sandbox-mood" value="Overwhelmed" /></span>
+          <span class="chip-text">🌧️ Overwhelmed</span>
+        </label>
+        <label class="mood-chip" id="mood-chip-4">
+          <span class="radio-wrapper"><input type="radio" name="sandbox-mood" value="Grateful" /></span>
+          <span class="chip-text">✨ Grateful</span>
+        </label>
+        <label class="mood-chip" id="mood-chip-5">
+          <span class="radio-wrapper"><input type="radio" name="sandbox-mood" value="Fatigued" /></span>
+          <span class="chip-text">🌙 Fatigued</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-header">
+        <span class="prompt-label">Daily Guided Prompt</span>
+        <button type="button" id="btn-shuffle-prompt" class="prompt-shuffle-btn">
+          <span>Shuffle Prompt ↻</span>
+        </button>
+      </div>
+      <p class="prompt-text" id="active-prompt-text">
+        "What feels gentle and steady in your life today, even amidst the noise?"
+      </p>
+    </div>
+
+    <div class="textarea-area">
+      <div id="sandbox-textarea-wrap" class="textarea-wrapper">
+        <textarea
+          id="sandbox-reflection-input"
+          rows="4"
+          placeholder="Write whatever is in your heart. No filters, no judgment, just space for yourself..."
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="sandbox-footer">
+      <div class="footer-meta">
+        <span class="counter-text" id="reflection-counter">0 words written</span>
+        <span class="saved-indicator" id="saved-indicator">● Auto-ready</span>
+      </div>
+
+      <div class="footer-actions">
+        <button type="button" id="btn-clear-reflection" class="btn-clear">
+          Clear
+        </button>
+        <button type="button" id="btn-save-reflection" class="btn-save">
+          Save Reflection
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import {
+    drawablyCard,
+    drawablyButton,
+    drawablyRadio,
+    drawablyTextarea,
+    drawablyBadge,
+  } from "drawably";
+
+  const PROMPTS = [
+    "What feels gentle and steady in your life today, even amidst the noise?",
+    "Where in your body are you holding tension right now, and what does it need?",
+    "Name one sensory detail from this morning that brought you a quiet smile.",
+    "What is a worry or expectation you are ready to set down for the rest of today?",
+    "If you spoke to yourself today with unconditional warmth, what would you say?",
+    "What is something small you did recently that your future self will thank you for?"
+  ];
+
+  let currentPromptIndex = 0;
+
+  function initJournalSandbox() {
+    const sandboxPill = document.querySelector<HTMLElement>("#sandbox-pill");
+    if (sandboxPill) {
+      drawablyBadge(sandboxPill, { variant: "scribble", roughness: 0.8 });
+    }
+
+    const privacyTag = document.querySelector<HTMLElement>("#sandbox-privacy-tag");
+    if (privacyTag) {
+      drawablyBadge(privacyTag, { variant: "outline", roughness: 0.9 });
+    }
+
+    const card = document.querySelector<HTMLElement>("#journal-sandbox-card");
+    if (card) {
+      drawablyCard(card, { roughness: 1.0 });
+    }
+
+    const radios = document.querySelectorAll<HTMLElement>(".radio-wrapper");
+    radios.forEach((r) => {
+      drawablyRadio(r, { roughness: 1.0 });
+    });
+
+    const textareaWrap = document.querySelector<HTMLElement>("#sandbox-textarea-wrap");
+    if (textareaWrap) {
+      drawablyTextarea(textareaWrap, { roughness: 1.0 });
+    }
+
+    const btnShuffle = document.querySelector<HTMLElement>("#btn-shuffle-prompt");
+    if (btnShuffle) {
+      drawablyButton(btnShuffle, { variant: "outline", tone: "neutral", roughness: 0.9 });
+    }
+
+    const btnClear = document.querySelector<HTMLElement>("#btn-clear-reflection");
+    if (btnClear) {
+      drawablyButton(btnClear, { variant: "outline", tone: "neutral", roughness: 0.9 });
+    }
+
+    const btnSave = document.querySelector<HTMLElement>("#btn-save-reflection");
+    let saveSketch: ReturnType<typeof drawablyButton> | null = null;
+    if (btnSave) {
+      saveSketch = drawablyButton(btnSave, {
+        variant: "solid",
+        fill: "#253830",
+        stroke: "#253830",
+        paper: "#ffffff",
+        roughness: 1.0,
+      });
+    }
+
+    const promptText = document.querySelector("#active-prompt-text");
+    if (btnShuffle && promptText) {
+      btnShuffle.addEventListener("click", () => {
+        currentPromptIndex = (currentPromptIndex + 1) % PROMPTS.length;
+        promptText.textContent = `"${PROMPTS[currentPromptIndex]}"`;
+      });
+    }
+
+    const textarea = document.querySelector<HTMLTextAreaElement>("#sandbox-reflection-input");
+    const counter = document.querySelector("#reflection-counter");
+    if (textarea && counter) {
+      textarea.addEventListener("input", () => {
+        const text = textarea.value.trim();
+        const words = text ? text.split(/\s+/).length : 0;
+        counter.textContent = `${words} ${words === 1 ? "word" : "words"} written`;
+      });
+    }
+
+    if (btnClear && textarea && counter) {
+      btnClear.addEventListener("click", () => {
+        textarea.value = "";
+        counter.textContent = "0 words written";
+        textarea.focus();
+      });
+    }
+
+    const savedIndicator = document.querySelector("#saved-indicator");
+    if (btnSave && saveSketch) {
+      btnSave.addEventListener("click", () => {
+        saveSketch.setState("loading");
+        if (savedIndicator) savedIndicator.textContent = "● Saving locally...";
+
+        setTimeout(() => {
+          saveSketch.setState("success");
+          if (btnSave) btnSave.textContent = "Saved Peacefully";
+          if (savedIndicator) savedIndicator.textContent = "✓ Documented in local session";
+
+          setTimeout(() => {
+            saveSketch.setState("idle");
+            if (btnSave) btnSave.textContent = "Save Reflection";
+            if (savedIndicator) savedIndicator.textContent = "● Auto-ready";
+          }, 2400);
+        }, 900);
+      });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initJournalSandbox);
+  } else {
+    initJournalSandbox();
+  }
+  document.addEventListener("astro:page-load", initJournalSandbox);
+</script>
+
+<style>
+  .sandbox-wrapper {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .sandbox-annotation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding: 0 4px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .sandbox-pill {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--accent-sage);
+    padding: 2px 8px;
+  }
+
+  .sandbox-hint {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+  }
+
+  .sandbox-card {
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 4px;
+    box-shadow: 0 12px 36px rgba(37, 56, 48, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .sandbox-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed rgba(37, 56, 48, 0.12);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .entry-date {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .privacy-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-sage);
+    padding: 2px 8px;
+  }
+
+  .entry-time {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+  }
+
+  .mood-selection-area {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .section-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  .mood-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .mood-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--bg-sage-subtle);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    user-select: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .mood-chip:hover {
+    background: #e4eee7;
+    color: var(--text-primary);
+  }
+
+  .radio-wrapper {
+    display: inline-flex;
+    position: relative;
+    width: 20px;
+    height: 20px;
+  }
+
+  .chip-text {
+    font-weight: 500;
+  }
+
+  .prompt-box {
+    background: var(--bg-sage-subtle);
+    padding: 16px 20px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .prompt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .prompt-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-sage);
+  }
+
+  .prompt-shuffle-btn {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 4px 10px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+  }
+
+  .prompt-text {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    font-style: italic;
+  }
+
+  .textarea-area {
+    width: 100%;
+  }
+
+  .textarea-wrapper {
+    width: 100%;
+  }
+
+  .textarea-wrapper textarea {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+    width: 100%;
+    min-height: 110px;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: vertical;
+  }
+
+  .textarea-wrapper textarea::placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+    opacity: 0.75;
+  }
+
+  .sandbox-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(37, 56, 48, 0.12);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.8125rem;
+  }
+
+  .counter-text {
+    color: var(--text-muted);
+  }
+
+  .saved-indicator {
+    color: var(--accent-sage);
+    font-weight: 550;
+  }
+
+  .footer-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn-clear {
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+  }
+
+  .btn-save {
+    --drawably-fill: #253830;
+    --drawably-stroke: #253830;
+    --drawably-paper: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    background: transparent;
+    border: none;
+    color: #ffffff !important;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 640px) {
+    .sandbox-card {
+      padding: 20px;
+    }
+
+    .sandbox-footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .footer-actions {
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+</style>
