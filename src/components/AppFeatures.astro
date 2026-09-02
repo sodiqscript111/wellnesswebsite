@@ -1,7 +1,7 @@
-﻿---
+---
 ---
 
-<section id="features" class="features-section">
+<section id="features" class="features-section drawably-reveal">
   <div class="features-container">
     <div class="features-header">
       <div class="badge-wrap">
@@ -170,21 +170,32 @@
     drawablyHighlight,
   } from "drawably";
 
-  function initAppFeatures() {
+  async function initAppFeatures() {
+    if (document.fonts) {
+      try {
+        await document.fonts.ready;
+      } catch (_) {}
+    }
+
+    const section = document.querySelector<HTMLElement>("#features");
+
     const featuresBadge = document.querySelector<HTMLElement>("#features-badge");
-    if (featuresBadge) {
+    if (featuresBadge && !featuresBadge.dataset.drawn) {
+      featuresBadge.dataset.drawn = "1";
       drawablyBadge(featuresBadge, { variant: "scribble", roughness: 0.8 });
     }
 
     const featuresHl = document.querySelector<HTMLElement>("#features-hl");
-    if (featuresHl) {
+    if (featuresHl && !featuresHl.dataset.drawn) {
+      featuresHl.dataset.drawn = "1";
       drawablyHighlight(featuresHl, { roughness: 1.1 });
     }
 
     const featCards = ["#feat-card-1", "#feat-card-2", "#feat-card-3", "#feat-card-4"];
     featCards.forEach((id) => {
       const card = document.querySelector<HTMLElement>(id);
-      if (card) {
+      if (card && !card.dataset.drawn) {
+        card.dataset.drawn = "1";
         drawablyCard(card, { roughness: 1.05 });
       }
     });
@@ -192,7 +203,8 @@
     const chipIds = ["#feat-chip-1", "#feat-chip-2", "#feat-chip-3", "#feat-chip-4"];
     chipIds.forEach((id) => {
       const chip = document.querySelector<HTMLElement>(id);
-      if (chip) {
+      if (chip && !chip.dataset.drawn) {
+        chip.dataset.drawn = "1";
         drawablyBadge(chip, { variant: "outline", roughness: 0.9 });
       }
     });
@@ -200,7 +212,8 @@
     const catIds = ["#cat-pill-1", "#cat-pill-2", "#cat-pill-3", "#cat-pill-4", "#cat-pill-5"];
     catIds.forEach((id) => {
       const pill = document.querySelector<HTMLElement>(id);
-      if (pill) {
+      if (pill && !pill.dataset.drawn) {
+        pill.dataset.drawn = "1";
         drawablyBadge(pill, { variant: "outline", roughness: 0.85 });
       }
     });
@@ -208,10 +221,15 @@
     const toggleIds = ["#toggle-wrap-1", "#toggle-wrap-2", "#toggle-wrap-3"];
     toggleIds.forEach((id) => {
       const wrap = document.querySelector<HTMLElement>(id);
-      if (wrap) {
+      if (wrap && !wrap.dataset.drawn) {
+        wrap.dataset.drawn = "1";
         drawablyToggle(wrap, { roughness: 1.0 });
       }
     });
+
+    if (section) {
+      section.classList.add("is-visible");
+    }
   }
 
   if (document.readyState === "loading") {

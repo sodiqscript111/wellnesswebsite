@@ -1,4 +1,4 @@
----
+﻿---
 import "drawably/style.css";
 
 interface Props {
@@ -86,5 +86,34 @@ const {
 	::selection {
 		background: #d8e8dc;
 		color: #1a2c24;
+	}
+
+	.drawably-host {
+		position: relative !important;
+		isolation: isolate;
+	}
+
+	.drawably-svg {
+		position: absolute !important;
+		inset: 0 !important;
+		width: 100% !important;
+		height: 100% !important;
+		overflow: visible !important;
+		pointer-events: none !important;
+		z-index: 0 !important;
+	}
+
+	.drawably-svg path {
+		stroke: var(--drawably-stroke, #253830);
+		vector-effect: non-scaling-stroke;
+	}
+
+	.drawably-reveal {
+		opacity: 0;
+		transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	.drawably-reveal.is-visible {
+		opacity: 1;
 	}
 </style>

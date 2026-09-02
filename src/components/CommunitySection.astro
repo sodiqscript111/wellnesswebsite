@@ -1,7 +1,7 @@
 ﻿---
 ---
 
-<section id="community" class="community-section">
+<section id="community" class="community-section drawably-reveal">
   <div class="community-container">
     <div class="community-header">
       <div class="badge-wrap">
@@ -117,26 +117,38 @@
     drawablyHighlight,
   } from "drawably";
 
-  function initCommunitySection() {
+  async function initCommunitySection() {
+    if (document.fonts) {
+      try {
+        await document.fonts.ready;
+      } catch (_) {}
+    }
+
+    const section = document.querySelector<HTMLElement>("#community");
+
     const communityBadge = document.querySelector<HTMLElement>("#community-badge");
-    if (communityBadge) {
+    if (communityBadge && !communityBadge.dataset.drawn) {
+      communityBadge.dataset.drawn = "1";
       drawablyBadge(communityBadge, { variant: "scribble", roughness: 0.8 });
     }
 
     const communityHl = document.querySelector<HTMLElement>("#community-hl");
-    if (communityHl) {
+    if (communityHl && !communityHl.dataset.drawn) {
+      communityHl.dataset.drawn = "1";
       drawablyHighlight(communityHl, { roughness: 1.1 });
     }
 
     const statsCard = document.querySelector<HTMLElement>("#stats-banner-card");
-    if (statsCard) {
+    if (statsCard && !statsCard.dataset.drawn) {
+      statsCard.dataset.drawn = "1";
       drawablyCard(statsCard, { roughness: 1.0 });
     }
 
     const circleIds = ["#stat-circle-1", "#stat-circle-2", "#stat-circle-3"];
     circleIds.forEach((id) => {
       const el = document.querySelector<HTMLElement>(id);
-      if (el) {
+      if (el && !el.dataset.drawn) {
+        el.dataset.drawn = "1";
         drawablyCircle(el, { roughness: 1.15, boil: 0.25 });
       }
     });
@@ -144,7 +156,8 @@
     const storyCards = ["#story-card-1", "#story-card-2", "#story-card-3"];
     storyCards.forEach((id) => {
       const card = document.querySelector<HTMLElement>(id);
-      if (card) {
+      if (card && !card.dataset.drawn) {
+        card.dataset.drawn = "1";
         drawablyCard(card, { roughness: 1.05 });
       }
     });
@@ -152,10 +165,15 @@
     const tagIds = ["#story-tag-1", "#story-tag-2", "#story-tag-3"];
     tagIds.forEach((id) => {
       const tag = document.querySelector<HTMLElement>(id);
-      if (tag) {
+      if (tag && !tag.dataset.drawn) {
+        tag.dataset.drawn = "1";
         drawablyBadge(tag, { variant: "outline", roughness: 0.85 });
       }
     });
+
+    if (section) {
+      section.classList.add("is-visible");
+    }
   }
 
   if (document.readyState === "loading") {
@@ -305,7 +323,7 @@
     height: 38px;
     border-radius: 50%;
     background: var(--bg-sage-subtle);
-    border: 1px solid var(--accent-sage);
+    border: 1.5px solid var(--accent-sage);
     display: flex;
     align-items: center;
     justify-content: center;

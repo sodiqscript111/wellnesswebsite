@@ -1,7 +1,7 @@
 ---
 ---
 
-<section id="download" class="download-section">
+<section id="download" class="download-section drawably-reveal">
   <div class="download-container">
     <div class="cta-banner" id="cta-banner-card">
       <div class="cta-header">
@@ -86,26 +86,38 @@
     drawablyHighlight,
   } from "drawably";
 
-  function initDownloadCTA() {
+  async function initDownloadCTA() {
+    if (document.fonts) {
+      try {
+        await document.fonts.ready;
+      } catch (_) {}
+    }
+
+    const section = document.querySelector<HTMLElement>("#download");
+
     const ctaBadge = document.querySelector<HTMLElement>("#cta-badge");
-    if (ctaBadge) {
+    if (ctaBadge && !ctaBadge.dataset.drawn) {
+      ctaBadge.dataset.drawn = "1";
       drawablyBadge(ctaBadge, { variant: "scribble", roughness: 0.8 });
     }
 
     const ctaHl = document.querySelector<HTMLElement>("#cta-hl");
-    if (ctaHl) {
+    if (ctaHl && !ctaHl.dataset.drawn) {
+      ctaHl.dataset.drawn = "1";
       drawablyHighlight(ctaHl, { roughness: 1.1 });
     }
 
     const bannerCard = document.querySelector<HTMLElement>("#cta-banner-card");
-    if (bannerCard) {
+    if (bannerCard && !bannerCard.dataset.drawn) {
+      bannerCard.dataset.drawn = "1";
       drawablyCard(bannerCard, { roughness: 1.0 });
     }
 
     const platCards = ["#platform-card-1", "#platform-card-2"];
     platCards.forEach((id) => {
       const card = document.querySelector<HTMLElement>(id);
-      if (card) {
+      if (card && !card.dataset.drawn) {
+        card.dataset.drawn = "1";
         drawablyCard(card, { roughness: 1.05 });
       }
     });
@@ -113,7 +125,8 @@
     const chipIds = ["#plat-chip-1", "#plat-chip-2"];
     chipIds.forEach((id) => {
       const chip = document.querySelector<HTMLElement>(id);
-      if (chip) {
+      if (chip && !chip.dataset.drawn) {
+        chip.dataset.drawn = "1";
         drawablyBadge(chip, { variant: "outline", roughness: 0.85 });
       }
     });
@@ -121,13 +134,15 @@
     const guarIds = ["#guar-badge-1", "#guar-badge-2", "#guar-badge-3"];
     guarIds.forEach((id) => {
       const el = document.querySelector<HTMLElement>(id);
-      if (el) {
+      if (el && !el.dataset.drawn) {
+        el.dataset.drawn = "1";
         drawablyBadge(el, { variant: "outline", roughness: 0.9 });
       }
     });
 
     const btnAppStore = document.querySelector<HTMLElement>("#btn-app-store");
-    if (btnAppStore) {
+    if (btnAppStore && !btnAppStore.dataset.drawn) {
+      btnAppStore.dataset.drawn = "1";
       drawablyButton(btnAppStore, {
         variant: "solid",
         fill: "#253830",
@@ -138,7 +153,8 @@
     }
 
     const btnGooglePlay = document.querySelector<HTMLElement>("#btn-google-play");
-    if (btnGooglePlay) {
+    if (btnGooglePlay && !btnGooglePlay.dataset.drawn) {
+      btnGooglePlay.dataset.drawn = "1";
       drawablyButton(btnGooglePlay, {
         variant: "outline",
         tone: "neutral",
@@ -147,7 +163,8 @@
     }
 
     const btnWeb = document.querySelector<HTMLElement>("#btn-web-sanctuary");
-    if (btnWeb) {
+    if (btnWeb && !btnWeb.dataset.drawn) {
+      btnWeb.dataset.drawn = "1";
       drawablyButton(btnWeb, {
         variant: "solid",
         fill: "#253830",
@@ -155,6 +172,10 @@
         paper: "#ffffff",
         roughness: 1.0,
       });
+    }
+
+    if (section) {
+      section.classList.add("is-visible");
     }
   }
 

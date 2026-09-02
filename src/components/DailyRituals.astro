@@ -1,7 +1,7 @@
 ﻿---
 ---
 
-<section id="rituals" class="rituals-section">
+<section id="rituals" class="rituals-section drawably-reveal">
   <div class="rituals-container">
     <div class="section-header">
       <div class="badge-wrap">
@@ -118,21 +118,32 @@
     drawablyDivider
   } from "drawably";
 
-  function initDailyRituals() {
+  async function initDailyRituals() {
+    if (document.fonts) {
+      try {
+        await document.fonts.ready;
+      } catch (_) {}
+    }
+
+    const section = document.querySelector<HTMLElement>("#rituals");
+
     const ritualsBadge = document.querySelector<HTMLElement>("#rituals-badge");
-    if (ritualsBadge) {
+    if (ritualsBadge && !ritualsBadge.dataset.drawn) {
+      ritualsBadge.dataset.drawn = "1";
       drawablyBadge(ritualsBadge, { variant: "scribble", roughness: 0.8 });
     }
 
     const ritualsHl = document.querySelector<HTMLElement>("#rituals-hl");
-    if (ritualsHl) {
+    if (ritualsHl && !ritualsHl.dataset.drawn) {
+      ritualsHl.dataset.drawn = "1";
       drawablyHighlight(ritualsHl, { roughness: 1.1 });
     }
 
     const cardIds = ["#ritual-card-1", "#ritual-card-2", "#ritual-card-3"];
     cardIds.forEach((id) => {
       const card = document.querySelector<HTMLElement>(id);
-      if (card) {
+      if (card && !card.dataset.drawn) {
+        card.dataset.drawn = "1";
         drawablyCard(card, { roughness: 1.05 });
       }
     });
@@ -140,7 +151,8 @@
     const badgeIds = ["#badge-ritual-1", "#badge-ritual-2", "#badge-ritual-3"];
     badgeIds.forEach((id) => {
       const badge = document.querySelector<HTMLElement>(id);
-      if (badge) {
+      if (badge && !badge.dataset.drawn) {
+        badge.dataset.drawn = "1";
         drawablyBadge(badge, { variant: "outline", roughness: 0.9 });
       }
     });
@@ -148,19 +160,26 @@
     const listIds = ["#ritual-list-1", "#ritual-list-2", "#ritual-list-3"];
     listIds.forEach((id) => {
       const list = document.querySelector<HTMLElement>(id);
-      if (list) {
+      if (list && !list.dataset.drawn) {
+        list.dataset.drawn = "1";
         drawablyList(list, { marker: "check", roughness: 1.1 });
       }
     });
 
     const divTop = document.querySelector<HTMLElement>("#quote-divider-top");
-    if (divTop) {
+    if (divTop && !divTop.dataset.drawn) {
+      divTop.dataset.drawn = "1";
       drawablyDivider(divTop, { roughness: 1.2 });
     }
 
     const divBottom = document.querySelector<HTMLElement>("#quote-divider-bottom");
-    if (divBottom) {
+    if (divBottom && !divBottom.dataset.drawn) {
+      divBottom.dataset.drawn = "1";
       drawablyDivider(divBottom, { roughness: 1.2 });
+    }
+
+    if (section) {
+      section.classList.add("is-visible");
     }
   }
 

@@ -1,7 +1,7 @@
 ---
 ---
 
-<div class="sandbox-wrapper">
+<div class="sandbox-wrapper drawably-reveal">
   <div class="sandbox-annotation">
     <span class="sandbox-pill" id="sandbox-pill">Interactive Live Demo</span>
     <span class="sandbox-hint">Try documenting right now — no sign up required</span>
@@ -104,45 +104,63 @@
 
   let currentPromptIndex = 0;
 
-  function initJournalSandbox() {
+  async function initJournalSandbox() {
+    if (document.fonts) {
+      try {
+        await document.fonts.ready;
+      } catch (_) {}
+    }
+
+    const wrapper = document.querySelector<HTMLElement>(".sandbox-wrapper");
+
     const sandboxPill = document.querySelector<HTMLElement>("#sandbox-pill");
-    if (sandboxPill) {
+    if (sandboxPill && !sandboxPill.dataset.drawn) {
+      sandboxPill.dataset.drawn = "1";
       drawablyBadge(sandboxPill, { variant: "scribble", roughness: 0.8 });
     }
 
     const privacyTag = document.querySelector<HTMLElement>("#sandbox-privacy-tag");
-    if (privacyTag) {
+    if (privacyTag && !privacyTag.dataset.drawn) {
+      privacyTag.dataset.drawn = "1";
       drawablyBadge(privacyTag, { variant: "outline", roughness: 0.9 });
     }
 
     const card = document.querySelector<HTMLElement>("#journal-sandbox-card");
-    if (card) {
+    if (card && !card.dataset.drawn) {
+      card.dataset.drawn = "1";
       drawablyCard(card, { roughness: 1.0 });
     }
 
     const radios = document.querySelectorAll<HTMLElement>(".radio-wrapper");
     radios.forEach((r) => {
-      drawablyRadio(r, { roughness: 1.0 });
+      if (!r.dataset.drawn) {
+        r.dataset.drawn = "1";
+        drawablyRadio(r, { roughness: 1.0 });
+      }
     });
 
     const textareaWrap = document.querySelector<HTMLElement>("#sandbox-textarea-wrap");
-    if (textareaWrap) {
+    if (textareaWrap && !textareaWrap.dataset.drawn) {
+      textareaWrap.dataset.drawn = "1";
       drawablyTextarea(textareaWrap, { roughness: 1.0 });
     }
 
     const btnShuffle = document.querySelector<HTMLElement>("#btn-shuffle-prompt");
-    if (btnShuffle) {
+    if (btnShuffle && !btnShuffle.dataset.drawn) {
+      btnShuffle.dataset.drawn = "1";
       drawablyButton(btnShuffle, { variant: "outline", tone: "neutral", roughness: 0.9 });
     }
 
     const btnClear = document.querySelector<HTMLElement>("#btn-clear-reflection");
-    if (btnClear) {
+    if (btnClear && !btnClear.dataset.drawn) {
+      btnClear.dataset.drawn = "1";
       drawablyButton(btnClear, { variant: "outline", tone: "neutral", roughness: 0.9 });
     }
 
     const btnSave = document.querySelector<HTMLElement>("#btn-save-reflection");
     let saveSketch: ReturnType<typeof drawablyButton> | null = null;
-    if (btnSave) {
+    if (btnSave && !btnSave.dataset.drawn) {
+      btnSave.dataset.drawn = "1";
       saveSketch = drawablyButton(btnSave, {
         variant: "solid",
         fill: "#253830",
@@ -150,6 +168,10 @@
         paper: "#ffffff",
         roughness: 1.0,
       });
+    }
+
+    if (wrapper) {
+      wrapper.classList.add("is-visible");
     }
 
     const promptText = document.querySelector("#active-prompt-text");

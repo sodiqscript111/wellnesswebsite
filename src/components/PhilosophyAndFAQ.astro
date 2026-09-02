@@ -1,7 +1,7 @@
-﻿---
+---
 ---
 
-<section id="philosophy" class="philosophy-section">
+<section id="philosophy" class="philosophy-section drawably-reveal">
   <div class="philosophy-container">
     <div class="philosophy-header">
       <div class="badge-wrap">
@@ -122,21 +122,32 @@
     drawablyHighlight,
   } from "drawably";
 
-  function initPhilosophyAndFAQ() {
+  async function initPhilosophyAndFAQ() {
+    if (document.fonts) {
+      try {
+        await document.fonts.ready;
+      } catch (_) {}
+    }
+
+    const section = document.querySelector<HTMLElement>("#philosophy");
+
     const philBadge = document.querySelector<HTMLElement>("#phil-badge");
-    if (philBadge) {
+    if (philBadge && !philBadge.dataset.drawn) {
+      philBadge.dataset.drawn = "1";
       drawablyBadge(philBadge, { variant: "scribble", roughness: 0.8 });
     }
 
     const philHl = document.querySelector<HTMLElement>("#phil-hl");
-    if (philHl) {
+    if (philHl && !philHl.dataset.drawn) {
+      philHl.dataset.drawn = "1";
       drawablyHighlight(philHl, { roughness: 1.1 });
     }
 
     const pillarCards = ["#pillar-card-1", "#pillar-card-2", "#pillar-card-3"];
     pillarCards.forEach((id) => {
       const card = document.querySelector<HTMLElement>(id);
-      if (card) {
+      if (card && !card.dataset.drawn) {
+        card.dataset.drawn = "1";
         drawablyCard(card, { roughness: 1.05 });
       }
     });
@@ -144,18 +155,21 @@
     const pillarTags = ["#pillar-tag-1", "#pillar-tag-2", "#pillar-tag-3"];
     pillarTags.forEach((id) => {
       const tag = document.querySelector<HTMLElement>(id);
-      if (tag) {
+      if (tag && !tag.dataset.drawn) {
+        tag.dataset.drawn = "1";
         drawablyBadge(tag, { variant: "outline", roughness: 0.9 });
       }
     });
 
     const faqCard = document.querySelector<HTMLElement>("#faq-card-wrap");
-    if (faqCard) {
+    if (faqCard && !faqCard.dataset.drawn) {
+      faqCard.dataset.drawn = "1";
       drawablyCard(faqCard, { roughness: 1.0 });
     }
 
     const faqBadge = document.querySelector<HTMLElement>("#faq-badge");
-    if (faqBadge) {
+    if (faqBadge && !faqBadge.dataset.drawn) {
+      faqBadge.dataset.drawn = "1";
       drawablyBadge(faqBadge, { variant: "outline", roughness: 0.85 });
     }
 
@@ -165,7 +179,8 @@
       const answer = item.querySelector<HTMLElement>(".faq-answer");
       const icon = item.querySelector<HTMLElement>(".faq-icon");
 
-      if (btn && answer && icon) {
+      if (btn && answer && icon && !btn.dataset.initialized) {
+        btn.dataset.initialized = "1";
         btn.addEventListener("click", () => {
           const isOpen = btn.getAttribute("aria-expanded") === "true";
           btn.setAttribute("aria-expanded", String(!isOpen));
@@ -175,6 +190,10 @@
         });
       }
     });
+
+    if (section) {
+      section.classList.add("is-visible");
+    }
   }
 
   if (document.readyState === "loading") {
