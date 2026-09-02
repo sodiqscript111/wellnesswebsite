@@ -48,7 +48,7 @@
       <div class="prompt-header">
         <span class="prompt-label">Daily Guided Prompt</span>
         <button type="button" id="btn-shuffle-prompt" class="prompt-shuffle-btn">
-          <span>Shuffle Prompt ↻</span>
+          <span class="btn-text-dark">Shuffle Prompt ↻</span>
         </button>
       </div>
       <p class="prompt-text" id="active-prompt-text">
@@ -74,10 +74,10 @@
 
       <div class="footer-actions">
         <button type="button" id="btn-clear-reflection" class="btn-clear">
-          Clear
+          <span class="btn-text-dark">Clear</span>
         </button>
         <button type="button" id="btn-save-reflection" class="btn-save">
-          Save Reflection
+          <span id="save-btn-text" class="btn-text-white">Save Reflection</span>
         </button>
       </div>
     </div>
@@ -463,8 +463,16 @@
     padding: 8px 16px;
     background: transparent;
     border: none;
-    color: var(--text-secondary);
+    color: var(--text-primary) !important;
     cursor: pointer;
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-text-dark {
+    position: relative;
+    z-index: 2;
+    color: var(--text-primary) !important;
   }
 
   .btn-save {
@@ -480,6 +488,12 @@
     cursor: pointer;
     position: relative;
     z-index: 1;
+  }
+
+  .btn-text-white {
+    position: relative;
+    z-index: 2;
+    color: #ffffff !important;
   }
 
   @media (max-width: 640px) {

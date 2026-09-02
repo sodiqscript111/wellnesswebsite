@@ -36,10 +36,10 @@
 
           <div class="platform-actions">
             <button type="button" id="btn-app-store" class="btn-appstore">
-              Download on App Store
+              <span class="btn-text-white">Download on App Store</span>
             </button>
             <button type="button" id="btn-google-play" class="btn-playstore">
-              Get on Google Play
+              <span class="btn-text-dark">Get on Google Play</span>
             </button>
           </div>
         </div>
@@ -63,7 +63,7 @@
 
           <div class="platform-actions">
             <button type="button" id="btn-web-sanctuary" class="btn-launch-web">
-              Open Web Sanctuary &rarr;
+              <span class="btn-text-white">Open Web Sanctuary &rarr;</span>
             </button>
           </div>
         </div>
@@ -335,14 +335,28 @@
     z-index: 1;
   }
 
+  .btn-text-white {
+    position: relative;
+    z-index: 2;
+    color: #ffffff !important;
+  }
+
   .btn-playstore {
     font-size: 0.875rem;
     font-weight: 500;
     padding: 10px 18px;
     background: transparent;
     border: none;
-    color: var(--text-secondary);
+    color: var(--text-primary) !important;
     cursor: pointer;
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-text-dark {
+    position: relative;
+    z-index: 2;
+    color: var(--text-primary) !important;
   }
 
   .guarantee-strip {

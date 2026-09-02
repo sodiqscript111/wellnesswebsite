@@ -29,7 +29,7 @@
       <div class="nav-actions">
         <a href="#download" class="cta-link-wrapper">
           <button type="button" id="btn-cta" class="nav-btn-primary">
-            Get App
+            <span class="btn-text">Get App</span>
           </button>
         </a>
       </div>
@@ -44,9 +44,16 @@
     drawablyBadge
   } from "drawably";
 
-  function initDrawablyNav() {
+  async function initDrawablyNav() {
+    if (document.fonts) {
+      try {
+        await document.fonts.ready;
+      } catch (_) {}
+    }
+
     const brandCircle = document.querySelector<HTMLElement>("#brand-circle");
-    if (brandCircle) {
+    if (brandCircle && !brandCircle.dataset.drawn) {
+      brandCircle.dataset.drawn = "1";
       drawablyCircle(brandCircle, {
         roughness: 1.1,
         boil: 0.25,
@@ -54,7 +61,8 @@
     }
 
     const bannerBadge = document.querySelector<HTMLElement>("#banner-badge");
-    if (bannerBadge) {
+    if (bannerBadge && !bannerBadge.dataset.drawn) {
+      bannerBadge.dataset.drawn = "1";
       drawablyBadge(bannerBadge, {
         variant: "scribble",
         roughness: 0.8,
@@ -62,7 +70,8 @@
     }
 
     const btnCta = document.querySelector<HTMLElement>("#btn-cta");
-    if (btnCta) {
+    if (btnCta && !btnCta.dataset.drawn) {
+      btnCta.dataset.drawn = "1";
       drawablyButton(btnCta, {
         variant: "solid",
         fill: "#253830",
@@ -234,6 +243,12 @@
     cursor: pointer;
     position: relative;
     z-index: 1;
+  }
+
+  .nav-btn-primary .btn-text {
+    position: relative;
+    z-index: 2;
+    color: #ffffff !important;
   }
 
   @media (max-width: 600px) {

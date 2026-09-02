@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import JournalSandbox from '../components/JournalSandbox.astro';
@@ -29,12 +29,16 @@ import Footer from '../components/Footer.astro';
 			</p>
 
 			<div class="hero-actions">
-				<button type="button" id="hero-cta-btn" class="cta-button-primary">
-					Download the App — Free
-				</button>
-				<button type="button" id="hero-secondary-btn" class="cta-button-secondary">
-					Explore Documenting Rituals
-				</button>
+				<a href="#download" class="hero-btn-link">
+					<button type="button" id="hero-cta-btn" class="cta-button-primary">
+						<span class="btn-text-white">Download the App — Free</span>
+					</button>
+				</a>
+				<a href="#rituals" class="hero-btn-link">
+					<button type="button" id="hero-secondary-btn" class="cta-button-secondary">
+						<span class="btn-text-dark">Explore Documenting Rituals</span>
+					</button>
+				</a>
 			</div>
 
 			<div class="showcase-section">
@@ -59,24 +63,34 @@ import Footer from '../components/Footer.astro';
 		drawablyBadge,
 	} from "drawably";
 
-	function initHeroDrawably() {
+	async function initHeroDrawably() {
+		if (document.fonts) {
+			try {
+				await document.fonts.ready;
+			} catch (_) {}
+		}
+
 		const heroTag = document.querySelector<HTMLElement>("#hero-tag");
-		if (heroTag) {
+		if (heroTag && !heroTag.dataset.drawn) {
+			heroTag.dataset.drawn = "1";
 			drawablyBadge(heroTag, { variant: "outline", roughness: 0.9 });
 		}
 
 		const heroHighlight = document.querySelector<HTMLElement>("#hero-highlight");
-		if (heroHighlight) {
+		if (heroHighlight && !heroHighlight.dataset.drawn) {
+			heroHighlight.dataset.drawn = "1";
 			drawablyHighlight(heroHighlight, { roughness: 1.1 });
 		}
 
 		const heroCircle = document.querySelector<HTMLElement>("#hero-circle");
-		if (heroCircle) {
+		if (heroCircle && !heroCircle.dataset.drawn) {
+			heroCircle.dataset.drawn = "1";
 			drawablyCircle(heroCircle, { roughness: 1.2 });
 		}
 
 		const heroCtaBtn = document.querySelector<HTMLElement>("#hero-cta-btn");
-		if (heroCtaBtn) {
+		if (heroCtaBtn && !heroCtaBtn.dataset.drawn) {
+			heroCtaBtn.dataset.drawn = "1";
 			drawablyButton(heroCtaBtn, {
 				variant: "solid",
 				fill: "#253830",
@@ -87,7 +101,8 @@ import Footer from '../components/Footer.astro';
 		}
 
 		const heroSecondaryBtn = document.querySelector<HTMLElement>("#hero-secondary-btn");
-		if (heroSecondaryBtn) {
+		if (heroSecondaryBtn && !heroSecondaryBtn.dataset.drawn) {
+			heroSecondaryBtn.dataset.drawn = "1";
 			drawablyButton(heroSecondaryBtn, { variant: "outline", tone: "neutral", roughness: 0.9 });
 		}
 	}
@@ -176,6 +191,11 @@ import Footer from '../components/Footer.astro';
 		margin-bottom: 64px;
 	}
 
+	.hero-btn-link {
+		text-decoration: none;
+		display: inline-block;
+	}
+
 	.cta-button-primary {
 		--drawably-fill: #253830;
 		--drawably-stroke: #253830;
@@ -191,14 +211,28 @@ import Footer from '../components/Footer.astro';
 		z-index: 1;
 	}
 
+	.btn-text-white {
+		position: relative;
+		z-index: 2;
+		color: #ffffff !important;
+	}
+
 	.cta-button-secondary {
 		font-size: 1rem;
 		font-weight: 500;
 		padding: 12px 24px;
 		background: transparent;
 		border: none;
-		color: var(--text-secondary);
+		color: var(--text-primary) !important;
 		cursor: pointer;
+		position: relative;
+		z-index: 1;
+	}
+
+	.btn-text-dark {
+		position: relative;
+		z-index: 2;
+		color: var(--text-primary) !important;
 	}
 
 	.showcase-section {
@@ -217,6 +251,7 @@ import Footer from '../components/Footer.astro';
 			width: 100%;
 		}
 
+		.hero-btn-link,
 		.cta-button-primary,
 		.cta-button-secondary {
 			width: 100%;
