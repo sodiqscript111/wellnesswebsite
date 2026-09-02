@@ -1,0 +1,335 @@
+﻿---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+---
+
+<Layout title="I Am Well — Daily Mindful Documenting & Wellness Companion">
+	<Navbar />
+
+	<main class="hero-section">
+		<div class="hero-container">
+			<div class="hero-tag-wrap">
+				<span id="hero-tag" class="hero-tag">A mindful sanctuary for your mind</span>
+			</div>
+
+			<h1 class="hero-title">
+				Document your days with <span id="hero-highlight" class="hero-highlight">clarity</span>, gratitude, and <span id="hero-circle" class="hero-circle-word">calm</span>.
+			</h1>
+
+			<p class="hero-description">
+				<strong>I Am Well</strong> is a serene digital journal and daily wellness ritual app. 
+				Capture fleeting thoughts, track emotional weather, and reconnect with yourself—one gentle entry at a time.
+			</p>
+
+			<div class="hero-actions">
+				<button type="button" id="hero-cta-btn" class="cta-button-primary">
+					Download the App — Free
+				</button>
+				<button type="button" id="hero-secondary-btn" class="cta-button-secondary">
+					Explore Documenting Rituals
+				</button>
+			</div>
+
+			<div class="showcase-section">
+				<div id="journal-preview-card" class="preview-card">
+					<div class="card-header">
+						<div class="card-meta">
+							<span class="card-date">Today • Morning Reflection</span>
+							<span id="mood-badge" class="mood-badge">Peaceful</span>
+						</div>
+						<div class="card-time">8:30 AM</div>
+					</div>
+
+					<div class="card-prompt">
+						<em>Prompt: What feels grounded in your life right now?</em>
+					</div>
+
+					<p class="card-entry">
+						"The morning sunlight through the window. Sipping warm tea before checking any notifications. Remembering that healing is not about fixing everything, but creating space to breathe."
+					</p>
+
+					<div class="card-footer">
+						<div class="card-tags">
+							<span class="tag">#gratitude</span>
+							<span class="tag">#morning-ritual</span>
+							<span class="tag">#presence</span>
+						</div>
+						<span class="status-indicator">● Documented</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<script>
+	import {
+		drawablyButton,
+		drawablyCard,
+		drawablyHighlight,
+		drawablyCircle,
+		drawablyBadge,
+	} from "drawably";
+
+	function initHeroDrawably() {
+		const heroTag = document.querySelector<HTMLElement>("#hero-tag");
+		if (heroTag) {
+			drawablyBadge(heroTag, { variant: "outline", roughness: 0.9 });
+		}
+
+		const heroHighlight = document.querySelector<HTMLElement>("#hero-highlight");
+		if (heroHighlight) {
+			drawablyHighlight(heroHighlight, { roughness: 1.1 });
+		}
+
+		const heroCircle = document.querySelector<HTMLElement>("#hero-circle");
+		if (heroCircle) {
+			drawablyCircle(heroCircle, { roughness: 1.2 });
+		}
+
+		const heroCtaBtn = document.querySelector<HTMLElement>("#hero-cta-btn");
+		if (heroCtaBtn) {
+			drawablyButton(heroCtaBtn, {
+				variant: "solid",
+				fill: "#253830",
+				stroke: "#253830",
+				paper: "#ffffff",
+				roughness: 1.0,
+			});
+		}
+
+		const heroSecondaryBtn = document.querySelector<HTMLElement>("#hero-secondary-btn");
+		if (heroSecondaryBtn) {
+			drawablyButton(heroSecondaryBtn, { variant: "outline", tone: "neutral", roughness: 0.9 });
+		}
+
+		const journalCard = document.querySelector<HTMLElement>("#journal-preview-card");
+		if (journalCard) {
+			drawablyCard(journalCard, { roughness: 1.1 });
+		}
+
+		const moodBadge = document.querySelector<HTMLElement>("#mood-badge");
+		if (moodBadge) {
+			drawablyBadge(moodBadge, { variant: "scribble", roughness: 0.8 });
+		}
+	}
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initHeroDrawably);
+	} else {
+		initHeroDrawably();
+	}
+	document.addEventListener("astro:page-load", initHeroDrawably);
+</script>
+
+<style>
+	.hero-section {
+		padding: 72px 24px 96px;
+		background: radial-gradient(circle at 50% 10%, rgba(227, 239, 230, 0.45) 0%, transparent 60%);
+	}
+
+	.hero-container {
+		max-width: 860px;
+		margin: 0 auto;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.hero-tag-wrap {
+		margin-bottom: 24px;
+	}
+
+	.hero-tag {
+		font-size: 0.8125rem;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--accent-sage);
+		padding: 4px 14px;
+		display: inline-block;
+	}
+
+	.hero-title {
+		font-family: var(--font-serif);
+		font-size: clamp(2.25rem, 5vw, 3.75rem);
+		font-weight: 500;
+		line-height: 1.2;
+		letter-spacing: -0.025em;
+		color: var(--text-primary);
+		margin-bottom: 24px;
+	}
+
+	.hero-highlight {
+		font-style: italic;
+		color: var(--accent-sage-dark);
+		padding: 0 6px;
+	}
+
+	.hero-circle-word {
+		font-style: italic;
+		color: var(--accent-terracotta);
+		padding: 0 4px;
+	}
+
+	.hero-description {
+		font-family: var(--font-sans);
+		font-size: 1.1875rem;
+		font-weight: 400;
+		line-height: 1.75;
+		letter-spacing: -0.012em;
+		color: var(--text-secondary);
+		max-width: 620px;
+		margin-bottom: 36px;
+	}
+
+	.hero-description strong {
+		color: var(--text-primary);
+		font-weight: 600;
+	}
+
+	.hero-actions {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 16px;
+		flex-wrap: wrap;
+		margin-bottom: 64px;
+	}
+
+	.cta-button-primary {
+		--drawably-fill: #253830;
+		--drawably-stroke: #253830;
+		--drawably-paper: #ffffff;
+		font-size: 1rem;
+		font-weight: 600;
+		padding: 12px 28px;
+		background: transparent;
+		border: none;
+		color: #ffffff !important;
+		cursor: pointer;
+		position: relative;
+		z-index: 1;
+	}
+
+	.cta-button-secondary {
+		font-size: 1rem;
+		font-weight: 500;
+		padding: 12px 24px;
+		background: transparent;
+		border: none;
+		color: var(--text-secondary);
+		cursor: pointer;
+	}
+
+	.showcase-section {
+		width: 100%;
+		max-width: 640px;
+		margin: 0 auto;
+		text-align: left;
+	}
+
+	.preview-card {
+		background: #ffffff;
+		padding: 32px;
+		border-radius: 4px;
+		box-shadow: 0 8px 30px rgba(37, 56, 48, 0.05);
+	}
+
+	.card-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 16px;
+		padding-bottom: 12px;
+		border-bottom: 1px dashed rgba(37, 56, 48, 0.1);
+	}
+
+	.card-meta {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	.card-date {
+		font-size: 0.8125rem;
+		font-weight: 600;
+		color: var(--text-secondary);
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+	}
+
+	.mood-badge {
+		font-size: 0.75rem;
+		font-weight: 600;
+		color: var(--accent-sage);
+		padding: 2px 8px;
+	}
+
+	.card-time {
+		font-size: 0.8125rem;
+		color: var(--text-muted);
+	}
+
+	.card-prompt {
+		font-size: 0.9375rem;
+		color: var(--accent-sage);
+		margin-bottom: 14px;
+		font-weight: 500;
+	}
+
+	.card-entry {
+		font-family: var(--font-serif);
+		font-size: 1.15rem;
+		line-height: 1.7;
+		color: var(--text-primary);
+		margin-bottom: 24px;
+	}
+
+	.card-footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 12px;
+		font-size: 0.8125rem;
+	}
+
+	.card-tags {
+		display: flex;
+		gap: 8px;
+	}
+
+	.tag {
+		color: var(--text-muted);
+		background: var(--bg-sage-subtle);
+		padding: 2px 8px;
+		border-radius: 4px;
+	}
+
+	.status-indicator {
+		color: var(--accent-sage);
+		font-weight: 600;
+	}
+
+	@media (max-width: 600px) {
+		.hero-section {
+			padding: 48px 16px 64px;
+		}
+
+		.preview-card {
+			padding: 20px;
+		}
+
+		.hero-actions {
+			flex-direction: column;
+			width: 100%;
+		}
+
+		.cta-button-primary,
+		.cta-button-secondary {
+			width: 100%;
+		}
+	}
+</style>

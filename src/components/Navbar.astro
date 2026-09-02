@@ -1,0 +1,487 @@
+﻿---
+---
+
+<header class="site-header">
+  <div class="top-banner">
+    <div class="banner-inner">
+      <span class="banner-badge" id="banner-badge">Gentle Space</span>
+      <span class="banner-text">Take a deep breath. Document your journey with intention.</span>
+      <a href="#download" class="banner-link">Try the app &rarr;</a>
+    </div>
+  </div>
+
+  <nav class="navbar" aria-label="Main Navigation">
+    <div class="nav-container">
+      <a href="/" class="brand-link" aria-label="I Am Well Home">
+        <div class="brand-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12c0-2.5 1-4.8 2.6-6.5" />
+            <path d="M12 6v6l4 2" />
+            <path d="M16.5 3.5c1.5 1.5 2.5 3.5 2.5 5.5" />
+          </svg>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">I Am <span id="brand-circle" class="brand-highlight">Well</span></span>
+          <span class="brand-tagline">wellness & documenting</span>
+        </div>
+      </a>
+
+      <ul class="nav-menu" role="list">
+        <li>
+          <a href="#journal" class="nav-link">
+            <span class="nav-stroke-item">Daily Journal</span>
+          </a>
+        </li>
+        <li>
+          <a href="#checkin" class="nav-link">
+            <span class="nav-stroke-item">Mindful Check-in</span>
+          </a>
+        </li>
+        <li>
+          <a href="#rituals" class="nav-link">
+            <span class="nav-stroke-item">Rituals & Prompts</span>
+          </a>
+        </li>
+        <li>
+          <a href="#features" class="nav-link">
+            <span class="nav-stroke-item">App Features</span>
+          </a>
+        </li>
+        <li>
+          <a href="#philosophy" class="nav-link">
+            <span class="nav-stroke-item">Philosophy</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-actions">
+        <button type="button" id="btn-login" class="nav-btn-secondary">
+          Sign In
+        </button>
+        <button type="button" id="btn-cta" class="nav-btn-primary">
+          Get the App
+        </button>
+
+        <button type="button" id="mobile-menu-toggle" class="mobile-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+          <svg class="icon-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="mobile-menu-drawer" aria-hidden="true">
+      <ul class="mobile-nav-list" role="list">
+        <li><a href="#journal" class="mobile-nav-link">Daily Journal</a></li>
+        <li><a href="#checkin" class="mobile-nav-link">Mindful Check-in</a></li>
+        <li><a href="#rituals" class="mobile-nav-link">Rituals & Prompts</a></li>
+        <li><a href="#features" class="mobile-nav-link">App Features</a></li>
+        <li><a href="#philosophy" class="mobile-nav-link">Philosophy</a></li>
+      </ul>
+      <div class="mobile-actions">
+        <button type="button" id="btn-mobile-cta" class="nav-btn-primary full-width">Get the App</button>
+        <button type="button" id="btn-mobile-login" class="nav-btn-secondary full-width">Sign In</button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  import {
+    drawablyUnderline,
+    drawablyButton,
+    drawablyCircle,
+    drawablyBadge
+  } from "drawably";
+
+  function initDrawablyNav() {
+    const brandCircle = document.querySelector<HTMLElement>("#brand-circle");
+    if (brandCircle) {
+      drawablyCircle(brandCircle, {
+        roughness: 1.1,
+        boil: 0.25,
+      });
+    }
+
+    const bannerBadge = document.querySelector<HTMLElement>("#banner-badge");
+    if (bannerBadge) {
+      drawablyBadge(bannerBadge, {
+        variant: "scribble",
+        roughness: 0.8,
+      });
+    }
+
+    const navItems = document.querySelectorAll<HTMLElement>(".nav-stroke-item");
+    navItems.forEach((item) => {
+      drawablyUnderline(item, {
+        roughness: 1.2,
+        boil: 0.35,
+      });
+    });
+
+    const btnCta = document.querySelector<HTMLElement>("#btn-cta");
+    if (btnCta) {
+      drawablyButton(btnCta, {
+        variant: "solid",
+        fill: "#253830",
+        stroke: "#253830",
+        paper: "#ffffff",
+        roughness: 1.0,
+      });
+    }
+
+    const btnLogin = document.querySelector<HTMLElement>("#btn-login");
+    if (btnLogin) {
+      drawablyButton(btnLogin, {
+        variant: "outline",
+        tone: "neutral",
+        roughness: 0.9,
+      });
+    }
+
+    const btnMobileCta = document.querySelector<HTMLElement>("#btn-mobile-cta");
+    if (btnMobileCta) {
+      drawablyButton(btnMobileCta, {
+        variant: "solid",
+        fill: "#253830",
+        stroke: "#253830",
+        paper: "#ffffff",
+        roughness: 1.0,
+      });
+    }
+
+    const btnMobileLogin = document.querySelector<HTMLElement>("#btn-mobile-login");
+    if (btnMobileLogin) {
+      drawablyButton(btnMobileLogin, {
+        variant: "outline",
+        tone: "neutral",
+        roughness: 0.9,
+      });
+    }
+
+    const toggleBtn = document.querySelector("#mobile-menu-toggle");
+    const mobileMenu = document.querySelector("#mobile-menu");
+    if (toggleBtn && mobileMenu) {
+      toggleBtn.addEventListener("click", () => {
+        const isOpen = toggleBtn.getAttribute("aria-expanded") === "true";
+        toggleBtn.setAttribute("aria-expanded", String(!isOpen));
+        mobileMenu.setAttribute("aria-hidden", String(isOpen));
+        mobileMenu.classList.toggle("is-open", !isOpen);
+        toggleBtn.classList.toggle("is-active", !isOpen);
+      });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initDrawablyNav);
+  } else {
+    initDrawablyNav();
+  }
+  document.addEventListener("astro:page-load", initDrawablyNav);
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background: rgba(250, 248, 245, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-soft);
+    transition: background-color 0.2s ease;
+  }
+
+  .top-banner {
+    background: var(--bg-sage-subtle);
+    border-bottom: 1px dashed rgba(37, 56, 48, 0.12);
+    font-size: 0.8125rem;
+    padding: 6px 16px;
+    color: var(--text-secondary);
+  }
+
+  .banner-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  .banner-badge {
+    font-size: 0.725rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent-sage);
+    padding: 2px 8px;
+    display: inline-block;
+  }
+
+  .banner-text {
+    font-weight: 450;
+    letter-spacing: -0.01em;
+  }
+
+  .banner-link {
+    font-weight: 600;
+    color: var(--accent-sage-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.15s ease;
+  }
+
+  .banner-link:hover {
+    color: var(--accent-terracotta);
+  }
+
+  .navbar {
+    width: 100%;
+    padding: 14px 24px;
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    user-select: none;
+  }
+
+  .brand-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg-sage-subtle);
+    border: 1.5px solid var(--accent-sage);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-sage);
+    box-shadow: 0 2px 8px rgba(37, 56, 48, 0.06);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .brand-link:hover .brand-icon {
+    transform: rotate(12deg) scale(1.05);
+  }
+
+  .brand-text-wrap {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+
+  .brand-title {
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .brand-highlight {
+    display: inline-block;
+    padding: 0 4px;
+    color: var(--accent-sage);
+    font-style: italic;
+  }
+
+  .brand-tagline {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-link {
+    display: inline-block;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    padding: 6px 2px;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+
+  .nav-stroke-item {
+    display: inline-block;
+    padding: 2px 4px;
+    transition: color 0.15s ease;
+  }
+
+  :global(.nav-link .nav-stroke-item .drawably-svg) {
+    opacity: 0 !important;
+    transform: translateY(2px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  :global(.nav-link:hover .nav-stroke-item .drawably-svg),
+  :global(.nav-link:focus-visible .nav-stroke-item .drawably-svg) {
+    opacity: 1 !important;
+    transform: translateY(0);
+  }
+
+  .nav-link:hover .nav-stroke-item {
+    color: var(--text-primary);
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-btn-primary {
+    --drawably-fill: #253830;
+    --drawably-stroke: #253830;
+    --drawably-paper: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 6px;
+    background: transparent;
+    border: none;
+    color: #ffffff !important;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+  }
+
+  .nav-btn-secondary {
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 6px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+  }
+
+  .full-width {
+    width: 100%;
+    text-align: center;
+  }
+
+  .mobile-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+  }
+
+  .icon-close {
+    display: none;
+  }
+
+  .mobile-toggle.is-active .icon-menu {
+    display: none;
+  }
+
+  .mobile-toggle.is-active .icon-close {
+    display: block;
+  }
+
+  .mobile-menu-drawer {
+    display: none;
+    width: 100%;
+    background: var(--bg-cream);
+    border-top: 1px solid var(--border-soft);
+    padding: 20px 24px;
+    box-shadow: 0 12px 24px rgba(37, 56, 48, 0.08);
+  }
+
+  .mobile-menu-drawer.is-open {
+    display: block;
+    animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .mobile-nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .mobile-nav-link {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    display: block;
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(37, 56, 48, 0.08);
+  }
+
+  .mobile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .nav-menu,
+    .nav-actions .nav-btn-primary,
+    .nav-actions .nav-btn-secondary {
+      display: none;
+    }
+
+    .mobile-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .top-banner {
+      display: none;
+    }
+
+    .navbar {
+      padding: 12px 16px;
+    }
+  }
+</style>
