@@ -1,0 +1,414 @@
+﻿---
+---
+
+<section id="philosophy" class="philosophy-section">
+  <div class="philosophy-container">
+    <div class="philosophy-header">
+      <div class="badge-wrap">
+        <span id="phil-badge" class="phil-badge">Philosophy & Science</span>
+      </div>
+      <h2 class="phil-title">
+        The science of <span id="phil-hl" class="highlight-word">expressive writing</span> and somatic pauses.
+      </h2>
+      <p class="phil-subtitle">
+        Documenting your inner thoughts is not just a poetic habit. It is a clinically supported practice for calming your nervous system.
+      </p>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar-card" id="pillar-card-1">
+        <span class="pillar-num">01</span>
+        <h3 class="pillar-title">Neural De-Escalation</h3>
+        <p class="pillar-desc">
+          When overwhelming thoughts stay unwritten, the brain loops in rumination. Translating emotions into structured language activates the prefrontal cortex and reduces amygdala reactivity.
+        </p>
+        <span class="pillar-tag" id="pillar-tag-1">Pennebaker Research</span>
+      </div>
+
+      <div class="pillar-card" id="pillar-card-2">
+        <span class="pillar-num">02</span>
+        <h3 class="pillar-title">Somatic Interruption</h3>
+        <p class="pillar-desc">
+          Stress accumulates in physical posture—clenched jaws, elevated shoulders, shallow breath. A 30-second somatic pause interrupts subconscious fight-or-flight loops before chronic fatigue sets in.
+        </p>
+        <span class="pillar-tag" id="pillar-tag-2">Nervous System Reset</span>
+      </div>
+
+      <div class="pillar-card" id="pillar-card-3">
+        <span class="pillar-num">03</span>
+        <h3 class="pillar-title">Zero-Streak Psychology</h3>
+        <p class="pillar-desc">
+          Gamified streaks turn mindfulness into a chore and induce shame when missed. Real healing is cyclical and forgiving. Come when you need space; your journal never judges your absence.
+        </p>
+        <span class="pillar-tag" id="pillar-tag-3">Anti-Shame Design</span>
+      </div>
+    </div>
+
+    <div class="faq-wrapper" id="faq-card-wrap">
+      <div class="faq-header">
+        <span class="faq-badge" id="faq-badge">Got Questions?</span>
+        <h3 class="faq-title">Frequently Asked Questions</h3>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button type="button" class="faq-question" aria-expanded="false">
+            <span>Is <em>I Am Well</em> a replacement for therapy?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" aria-hidden="true">
+            <p>
+              No. <em>I Am Well</em> is an intentional daily reflection companion designed for emotional hygiene, stress relief, and mindful grounding. It is not medical care, but it works wonderfully alongside therapy to help you observe patterns and bring clear insights to your sessions.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-question" aria-expanded="false">
+            <span>Where is my private data stored?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" aria-hidden="true">
+            <p>
+              Your thoughts belong entirely to you. All journal entries and voice reflections are saved directly on your device using zero-knowledge encryption. We do not sell data, use tracking cookies, or train public AI models on your private writing.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-question" aria-expanded="false">
+            <span>Do I have to write every single day?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" aria-hidden="true">
+            <p>
+              Never. We deliberately designed the app with zero streak counters and zero guilt notifications. You can document three times a day, twice a week, or whenever you need a grounding sanctuary.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-question" aria-expanded="false">
+            <span>Can I export my journal reflections?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" aria-hidden="true">
+            <p>
+              Yes. You can export your entries at any time as clean, formatted PDF documents, plain Markdown files, or encrypted local backups with a single tap.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-question" aria-expanded="false">
+            <span>Is the app free to use?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" aria-hidden="true">
+            <p>
+              Yes. The core daily rituals, prompt sanctuary, emotional weather map, and private vault are completely free forever.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import {
+    drawablyCard,
+    drawablyBadge,
+    drawablyHighlight,
+  } from "drawably";
+
+  function initPhilosophyAndFAQ() {
+    const philBadge = document.querySelector<HTMLElement>("#phil-badge");
+    if (philBadge) {
+      drawablyBadge(philBadge, { variant: "scribble", roughness: 0.8 });
+    }
+
+    const philHl = document.querySelector<HTMLElement>("#phil-hl");
+    if (philHl) {
+      drawablyHighlight(philHl, { roughness: 1.1 });
+    }
+
+    const pillarCards = ["#pillar-card-1", "#pillar-card-2", "#pillar-card-3"];
+    pillarCards.forEach((id) => {
+      const card = document.querySelector<HTMLElement>(id);
+      if (card) {
+        drawablyCard(card, { roughness: 1.05 });
+      }
+    });
+
+    const pillarTags = ["#pillar-tag-1", "#pillar-tag-2", "#pillar-tag-3"];
+    pillarTags.forEach((id) => {
+      const tag = document.querySelector<HTMLElement>(id);
+      if (tag) {
+        drawablyBadge(tag, { variant: "outline", roughness: 0.9 });
+      }
+    });
+
+    const faqCard = document.querySelector<HTMLElement>("#faq-card-wrap");
+    if (faqCard) {
+      drawablyCard(faqCard, { roughness: 1.0 });
+    }
+
+    const faqBadge = document.querySelector<HTMLElement>("#faq-badge");
+    if (faqBadge) {
+      drawablyBadge(faqBadge, { variant: "outline", roughness: 0.85 });
+    }
+
+    const faqItems = document.querySelectorAll<HTMLElement>(".faq-item");
+    faqItems.forEach((item) => {
+      const btn = item.querySelector<HTMLButtonElement>(".faq-question");
+      const answer = item.querySelector<HTMLElement>(".faq-answer");
+      const icon = item.querySelector<HTMLElement>(".faq-icon");
+
+      if (btn && answer && icon) {
+        btn.addEventListener("click", () => {
+          const isOpen = btn.getAttribute("aria-expanded") === "true";
+          btn.setAttribute("aria-expanded", String(!isOpen));
+          answer.setAttribute("aria-hidden", String(isOpen));
+          item.classList.toggle("is-active", !isOpen);
+          icon.textContent = isOpen ? "+" : "−";
+        });
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initPhilosophyAndFAQ);
+  } else {
+    initPhilosophyAndFAQ();
+  }
+  document.addEventListener("astro:page-load", initPhilosophyAndFAQ);
+</script>
+
+<style>
+  .philosophy-section {
+    padding: 96px 24px;
+    background-color: var(--bg-cream);
+    border-top: 1px solid var(--border-soft);
+  }
+
+  .philosophy-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+
+  .philosophy-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .phil-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-sage);
+    padding: 2px 10px;
+    display: inline-block;
+  }
+
+  .phil-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 3.8vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .highlight-word {
+    font-style: italic;
+    color: var(--accent-sage-dark);
+    padding: 0 4px;
+  }
+
+  .phil-subtitle {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .pillar-card {
+    background: #ffffff;
+    padding: 32px 28px;
+    border-radius: 4px;
+    box-shadow: 0 8px 28px rgba(37, 56, 48, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .pillar-num {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--accent-sage);
+    line-height: 1;
+  }
+
+  .pillar-title {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .pillar-desc {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin-bottom: auto;
+  }
+
+  .pillar-tag {
+    align-self: flex-start;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--accent-sage);
+    padding: 2px 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 12px;
+  }
+
+  .faq-wrapper {
+    background: #ffffff;
+    padding: 40px 36px;
+    border-radius: 4px;
+    box-shadow: 0 8px 28px rgba(37, 56, 48, 0.05);
+    max-width: 860px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .faq-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed rgba(37, 56, 48, 0.12);
+  }
+
+  .faq-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--accent-sage);
+    padding: 2px 8px;
+  }
+
+  .faq-title {
+    font-family: var(--font-serif);
+    font-size: 1.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border-soft);
+    padding: 6px 0;
+  }
+
+  .faq-item:last-child {
+    border-bottom: none;
+  }
+
+  .faq-question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 4px;
+    background: transparent;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.15s ease;
+  }
+
+  .faq-question:hover {
+    color: var(--accent-sage);
+  }
+
+  .faq-icon {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--accent-sage);
+    margin-left: 16px;
+    flex-shrink: 0;
+  }
+
+  .faq-answer {
+    display: none;
+    padding: 0 4px 18px;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .faq-item.is-active .faq-answer {
+    display: block;
+    animation: fadeIn 0.2s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .pillars-grid {
+      grid-template-columns: 1fr;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .philosophy-section {
+      padding: 64px 20px;
+    }
+
+    .faq-wrapper {
+      padding: 28px 20px;
+    }
+  }
+</style>
