@@ -1,0 +1,277 @@
+﻿---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <a href="/" class="footer-brand-link">
+          <div class="brand-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12c0-2.5 1-4.8 2.6-6.5" />
+              <path d="M12 6v6l4 2" />
+              <path d="M16.5 3.5c1.5 1.5 2.5 3.5 2.5 5.5" />
+            </svg>
+          </div>
+          <span class="brand-title">I Am <span class="brand-italic">Well</span></span>
+        </a>
+        <p class="footer-tagline">
+          A serene digital journal and daily wellness companion. Capture fleeting thoughts, track emotional weather, and reconnect with yourself.
+        </p>
+        <div class="status-wrap">
+          <span class="status-badge" id="footer-status-badge">100% Private & Local</span>
+        </div>
+      </div>
+
+      <div class="footer-links-col">
+        <h4 class="col-heading">Daily Rituals</h4>
+        <ul class="footer-links" role="list">
+          <li><a href="#rituals" class="footer-link"><span class="footer-stroke-item">Morning Intention</span></a></li>
+          <li><a href="#rituals" class="footer-link"><span class="footer-stroke-item">Somatic Check-In</span></a></li>
+          <li><a href="#rituals" class="footer-link"><span class="footer-stroke-item">Evening Release</span></a></li>
+          <li><a href="#journal" class="footer-link"><span class="footer-stroke-item">Prompt Shuffler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4 class="col-heading">Philosophy & Science</h4>
+        <ul class="footer-links" role="list">
+          <li><a href="#philosophy" class="footer-link"><span class="footer-stroke-item">Expressive Writing</span></a></li>
+          <li><a href="#philosophy" class="footer-link"><span class="footer-stroke-item">Somatic Awareness</span></a></li>
+          <li><a href="#philosophy" class="footer-link"><span class="footer-stroke-item">Anti-Streak Ethics</span></a></li>
+          <li><a href="#philosophy" class="footer-link"><span class="footer-stroke-item">Zero-Knowledge Vault</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4 class="col-heading">Sanctuary Apps</h4>
+        <ul class="footer-links" role="list">
+          <li><a href="#download" class="footer-link"><span class="footer-stroke-item">iOS App Store</span></a></li>
+          <li><a href="#download" class="footer-link"><span class="footer-stroke-item">Google Play Store</span></a></li>
+          <li><a href="#download" class="footer-link"><span class="footer-stroke-item">macOS Desktop</span></a></li>
+          <li><a href="#download" class="footer-link"><span class="footer-stroke-item">Web Sanctuary</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="pledge-text">
+        Built with intention. Zero advertisements, zero tracking pixels, zero algorithmic feeds.
+      </p>
+      <p class="copyright-text">
+        &copy; {currentYear} I Am Well. Hold space for yourself.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  import {
+    drawablyBadge,
+    drawablyUnderline
+  } from "drawably";
+
+  function initFooter() {
+    const statusBadge = document.querySelector<HTMLElement>("#footer-status-badge");
+    if (statusBadge) {
+      drawablyBadge(statusBadge, { variant: "outline", roughness: 0.85 });
+    }
+
+    const footerStrokes = document.querySelectorAll<HTMLElement>(".footer-stroke-item");
+    footerStrokes.forEach((item) => {
+      drawablyUnderline(item, {
+        roughness: 1.1,
+        boil: 0.3,
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initFooter);
+  } else {
+    initFooter();
+  }
+  document.addEventListener("astro:page-load", initFooter);
+</script>
+
+<style>
+  .site-footer {
+    background-color: var(--bg-cream);
+    border-top: 1px solid var(--border-soft);
+    padding: 80px 24px 48px;
+  }
+
+  .footer-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
+
+  .footer-brand-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 320px;
+  }
+
+  .footer-brand-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .brand-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg-sage-subtle);
+    border: 1.5px solid var(--accent-sage);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-sage);
+  }
+
+  .brand-title {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+  }
+
+  .brand-italic {
+    font-style: italic;
+    color: var(--accent-sage);
+  }
+
+  .footer-tagline {
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+
+  .status-wrap {
+    margin-top: 4px;
+  }
+
+  .status-badge {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--accent-sage);
+    padding: 2px 8px;
+    display: inline-block;
+  }
+
+  .footer-links-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .col-heading {
+    font-family: var(--font-serif);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-link {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    display: inline-block;
+    padding: 2px 0;
+    transition: color 0.15s ease;
+  }
+
+  .footer-stroke-item {
+    display: inline-block;
+    padding: 1px 2px;
+  }
+
+  :global(.footer-link .footer-stroke-item .drawably-svg) {
+    opacity: 0 !important;
+    transform: translateY(2px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  :global(.footer-link:hover .footer-stroke-item .drawably-svg),
+  :global(.footer-link:focus-visible .footer-stroke-item .drawably-svg) {
+    opacity: 1 !important;
+    transform: translateY(0);
+  }
+
+  .footer-link:hover {
+    color: var(--text-primary);
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 28px;
+    border-top: 1px dashed rgba(37, 56, 48, 0.12);
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.8125rem;
+  }
+
+  .pledge-text {
+    color: var(--text-muted);
+  }
+
+  .copyright-text {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .footer-brand-col {
+      grid-column: span 2;
+      max-width: 100%;
+    }
+
+    .site-footer {
+      padding: 56px 20px 36px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-brand-col {
+      grid-column: span 1;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
